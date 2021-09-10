@@ -9,8 +9,10 @@ ctrlHome.rutaPost = async (req, res) => {
 // console.log(nodos);
     const longitud = nodos.length
 
+    console.log(nodos);
+
     // if(longitud == 4 && nodos[4].password == 'nodoE'){
-        // console.log(nodos);
+    //     console.log(nodos);
 
         res.json({msg: 'recibido!'});
         let arrayNodos = addArray(nodos, ipSend, myIp);
@@ -28,20 +30,20 @@ ctrlHome.rutaPost = async (req, res) => {
 
 
 const addArray = (nodos, ipSend, myIp) =>{
-    console.log( nodos);
+    // console.log( JSON.parse(nodos));
    
-    // const misDatos = {"msg":{
-    //         "ip": myIp,
-    //         "name": "E"},
-    //     "ip-send": ipSend,
-    //     "ip-recibe": nodos[1].msg.ip,
-    //     "password":"nodoE"}
-    // const arrayNodos = [...nodos, misDatos];
-    // return arrayNodos;
+    const misDatos = {"msg":{
+            "ip": myIp,
+            "name": "E"},
+        "ip-send": ipSend,
+        "ip-recibe": nodos[1].msg.ip,
+        "password":"nodoE"}
+    const arrayNodos = [...nodos, misDatos];
+    return arrayNodos;
 }
 
 const sendArray = async (arrayNodos) =>{
-    const response = await fetch(`http://${ipSend}:4000/nodess`, {
+    const response = await fetch(`http://${ipSend}:4000/nodes`, {
         method: 'post',
         body: JSON.stringify({nodos: arrayNodos}),
         headers: {'Content-Type': 'application/json'}
